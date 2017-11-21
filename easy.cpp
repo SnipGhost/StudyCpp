@@ -24,6 +24,8 @@ class Shape
     }
 
     // Виртуальный деструктор (!)
+    // Был бы не виртуальным - могли бы быть проблемы с очисткой
+    // при очистке объектов дочернего класса через указатели Shape
     virtual ~Shape()
     {
         cout << "Shape deleted" << endl;
@@ -36,17 +38,20 @@ class Circle: public Shape
  public:
     int r;
 
+    // Конструктор круга (вызовет конструктор фигуры)
     Circle(int radius)
     {
         r = radius;
         cout << "Circle created!" << endl;
     }
 
+    // Деструктор круга (вызовет деструктор фигуры)
     ~Circle()
     {
         cout << "Circle deleted!" << endl;
     }
 
+    // Реализация метода подсчета площади
     float calcArea()
     {
         return 3.14 * r * r;
@@ -59,17 +64,20 @@ class Square: public Shape
  public:
     int a;
 
+    // Конструктор квадрата (вызовет конструктор фигуры)
     Square(int width)
     {
         a = width;
         cout << "Square created!" << endl;
     }
 
+    // Деструктор квадрата (вызовет деструктор фигуры)
     ~Square()
     {
         cout << "Square deleted!" << endl;
     }
 
+    // Реализация метода подсчета площади
     float calcArea()
     {
         return a * a;
